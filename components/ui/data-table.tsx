@@ -30,7 +30,13 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
-  const [selectedMessage, setSelectedMessage] = useState<any>(null);
+  const [selectedMessage, setSelectedMessage] = useState<{
+    name: string;
+    email: string;
+    phone: string;
+    message: string;
+    createdAt: string;
+  } | null>(null);
 
   const table = useReactTable({
     data,
@@ -119,9 +125,11 @@ export function DataTable<TData, TValue>({
                 <div>
                   <span className="font-semibold">Tarih:</span>{" "}
                   <span>
-                    {new Date(selectedMessage?.createdAt).toLocaleString(
-                      "tr-TR"
-                    )}
+                    {selectedMessage?.createdAt
+                      ? new Date(selectedMessage.createdAt).toLocaleString(
+                          "tr-TR"
+                        )
+                      : "Tarih belirtilmemiş"}
                   </span>
                 </div>
               </div>

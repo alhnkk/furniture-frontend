@@ -8,17 +8,23 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const menuItems = [
-    { name: "ANA SAYFA", href: "#" },
-    { name: "HAKKIMIZDA", href: "#about" },
-    { name: "HİZMETLER", href: "#services" },
-    { name: "ÜRÜNLER", href: "/products" },
-    { name: "İLETİŞİM", href: "#contact" },
+    { name: "Ana Sayfa", href: "#" },
+    { name: "Hakkımızda", href: "#about" },
+    { name: "Hizmetler", href: "#services" },
+    { name: "Ürünler", href: "/products" },
+    { name: "İletişim", href: "#contact" },
   ];
 
   const scrollToSection = (
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string
   ) => {
+    // If it's a page navigation (starts with '/'), let the default Link behavior handle it
+    if (href.startsWith("/")) {
+      setIsOpen(false);
+      return;
+    }
+
     e.preventDefault();
 
     // Handle special case for home page (scroll to top)

@@ -25,8 +25,7 @@ const CategoryListClient: React.FC<CategoryListClientProps> = ({
         "/upload/",
         "/upload/q_auto,f_auto,w_600,h_400,c_fill/"
       );
-    } catch (error) {
-      console.error("Image URL processing failed:", error);
+    } catch {
       return null;
     }
   };

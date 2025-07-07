@@ -16,7 +16,6 @@ const getCategories = async (): Promise<Category[]> => {
 
     // Validate that we received an array
     if (!Array.isArray(data)) {
-      console.error("Invalid categories response:", data);
       return [];
     }
 
@@ -39,7 +38,6 @@ const getCategories = async (): Promise<Category[]> => {
       updatedAt: category.updatedAt || "",
     }));
   } catch (error) {
-    console.error("Failed to fetch categories:", error);
     return [];
   }
 };

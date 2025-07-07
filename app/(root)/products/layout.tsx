@@ -1,6 +1,5 @@
 import { Poppins } from "next/font/google";
 import ProductsNavbar from "@/components/products-navbar";
-import Footer from "@/components/footer";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -20,7 +19,6 @@ export default function ProductsLayout({
     >
       <ProductsNavbar />
       {children}
-      <Footer />
     </div>
   );
 }

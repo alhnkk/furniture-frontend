@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "./ui/button";
-import { Phone, Mail, MapPin, Facebook, Instagram } from "lucide-react";
+import { Phone, Mail, Facebook, Instagram } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -82,10 +82,7 @@ export const Contact: React.FC<ContactProps> = ({
 
       <div className="container mx-auto px-4 relative">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-          <Link
-            href={`tel:${contactInfo.phone}`}
-           
-          >
+          <Link href={`tel:${contactInfo.phone}`}>
             <div className="flex items-center space-x-4">
               <div className="relative flex-shrink-0">
                 <div className="w-12 h-12 rounded-2xl bg-stone-50 border border-stone-100 flex items-center justify-center transform group-hover:scale-105 transition-all duration-300 group-hover:shadow-lg group-hover:border-amber-100">
@@ -101,10 +98,7 @@ export const Contact: React.FC<ContactProps> = ({
             </div>
           </Link>
 
-          <Link
-            href={`mailto:${contactInfo.email}`}
-            className="group"
-          >
+          <Link href={`mailto:${contactInfo.email}`} className="group">
             <div className="flex items-center space-x-4">
               <div className="relative flex-shrink-0">
                 <div className="w-12 h-12 rounded-2xl bg-stone-50 border border-stone-100 flex items-center justify-center transform group-hover:scale-105 transition-all duration-300 group-hover:shadow-lg group-hover:border-amber-100">
@@ -156,10 +150,7 @@ export const Contact: React.FC<ContactProps> = ({
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div
-           
-            className="relative h-full min-h-[400px]"
-          >
+          <div className="relative h-full min-h-[400px]">
             <div className="absolute -inset-1 bg-gradient-to-r from-stone-200 to-amber-100 rounded-2xl blur opacity-30" />
             <div className="relative rounded-2xl overflow-hidden h-full shadow-sm">
               <iframe
@@ -175,10 +166,7 @@ export const Contact: React.FC<ContactProps> = ({
             </div>
           </div>
 
-          <div
-           
-            className="relative"
-          >
+          <div className="relative">
             <div className="absolute -inset-1 bg-gradient-to-r from-stone-200 to-amber-100 rounded-2xl blur opacity-30" />
             <div className="relative bg-white shadow-sm rounded-2xl p-8">
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">

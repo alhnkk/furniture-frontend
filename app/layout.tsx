@@ -2,7 +2,6 @@ import { Poppins } from "next/font/google";
 import type { Metadata } from "next";
 
 import "./globals.css";
-import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
 const poppins = Poppins({
@@ -13,8 +12,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Derya Tasarım Mimarlık",
-  description: "Derya Tasarım Mimarlık",
+  title: "Derya Mimarlık Tasarım",
+  description: "Derya Mimarlık Tasarım",
 };
 
 export default function RootLayout({

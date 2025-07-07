@@ -3,19 +3,11 @@ import { Product } from "@/types";
 import Image from "next/image";
 
 export default function ProductSlider({ data }: { data: Product[] }) {
-  // Debug için kontroller
-  console.log("Tüm ürünler:", data?.length);
-  console.log("Featured ürünler:", data?.filter((p) => p.isFeatured)?.length);
-  console.log(
-    "Resimli ürünler:",
-    data?.filter((p) => p.images?.length > 0)?.length
-  );
 
   // Sadece öne çıkarılan ürünleri filtrele
   const featuredProducts = data?.filter((product) => product.isFeatured);
 
   if (!featuredProducts || featuredProducts.length === 0) {
-    console.log("Öne çıkarılan ürün bulunamadı");
     return null;
   }
 
@@ -24,16 +16,6 @@ export default function ProductSlider({ data }: { data: Product[] }) {
       <div className="grow">
         <MarqueeEffect gap={24}>
           {featuredProducts.map((product) => {
-            // Her ürün için debug
-            console.log(
-              "Ürün:",
-              product.name,
-              "Featured:",
-              product.isFeatured,
-              "Images:",
-              product.images?.length
-            );
-
             // İlk görseli al (varsa)
             const mainImage = product.images?.[0];
 

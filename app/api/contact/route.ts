@@ -21,8 +21,7 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json(data);
-  } catch (error) {
-    console.error("[CONTACT_ERROR]", error);
+  } catch {
     return new NextResponse("Internal error", { status: 500 });
   }
 }

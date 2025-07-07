@@ -12,18 +12,7 @@ const Footer = async () => {
     { name: "İletişim", href: "/contact" },
   ];
 
-  const socialLinks = [
-    {
-      label: "Instagram",
-      href: "https://instagram.com",
-      icon: Instagram,
-    },
-    {
-      label: "Facebook",
-      href: "https://facebook.com",
-      icon: Facebook,
-    },
-  ];
+
 
   return (
     <footer className="bg-stone-50 border-t border-stone-100">
@@ -96,7 +85,7 @@ const Footer = async () => {
             <div className="flex space-x-3">
               {socialMedia && (
                 <>
-                  <div>  
+                  <div>
                     <a
                       href={socialMedia.facebook}
                       target="_blank"
@@ -129,11 +118,11 @@ const Footer = async () => {
         {/* Copyright */}
         <div className="mt-12 pt-8 border-t border-stone-200">
           <p className="text-center text-sm text-neutral-600">
-            © {new Date().getFullYear()} Derya Tasarım Mimarlık. Tüm hakları
+            © {new Date().getFullYear()} Derya Mimarlık Tasarım. Tüm hakları
             saklıdır.
           </p>
-          </div>
         </div>
+      </div>
     </footer>
   );
 };
