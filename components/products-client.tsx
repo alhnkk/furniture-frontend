@@ -91,10 +91,13 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-        {filteredProducts.map((product) => {
+        {filteredProducts.map((product, productIndex) => {
           const imageUrl =
             product.images && product.images.length > 0 && product.images[0].url
-              ? product.images[0].url
+              ? product.images[0].url.replace(
+                  "/upload/",
+                  "/upload/f_webp,q_auto:eco,w_400,h_400,c_fill,g_center,fl_progressive/"
+                )
               : "/mockup.jpeg";
 
           return (
@@ -102,8 +105,7 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
               key={product.id}
               className="group cursor-pointer"
               onClick={() => handleProductSelect(product)}
-             
-            > 
+            >
               <div className="relative aspect-square overflow-hidden rounded-2xl">
                 <div className="absolute inset-0">
                   <div className="absolute inset-0 bg-[conic-gradient(from_0deg,#7c2d12_0deg,transparent_60deg,transparent_300deg,#7c2d12_360deg)] opacity-20 animate-[spin_8s_linear_infinite]" />
@@ -115,6 +117,10 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
                     alt={product.name || "Ürün Görseli"}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    priority={productIndex < 4}
+                    fetchPriority={productIndex < 4 ? "high" : "low"}
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                   />
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="bg-white/90 p-3 rounded-full">
@@ -170,7 +176,6 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
                             : "border-stone-200 hover:border-amber-800"
                         }`}
                         onClick={() => setSelectedGalleryImage(null)}
-                        
                       >
                         <Image
                           src={
@@ -182,7 +187,7 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
                         />
                       </div>
                       {selectedProduct.gallery.map((item: GalleryItem) => (
-                          <div
+                        <div
                           key={item.id}
                           className={`relative aspect-square rounded-lg overflow-hidden cursor-pointer border ${
                             selectedGalleryImage === item.image.url
@@ -192,7 +197,6 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
                           onClick={() =>
                             setSelectedGalleryImage(item.image.url)
                           }
-                         
                         >
                           <Image
                             src={item.image.url}

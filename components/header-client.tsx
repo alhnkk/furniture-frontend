@@ -87,14 +87,6 @@ const HeaderClient: React.FC<HeaderClientProps> = memo(({ data }) => {
     };
   }, [api]);
 
-  // Memoize optimized image URL
-  const getOptimizedImageUrl = useCallback((url: string) => {
-    return url.replace(
-      "/upload/",
-      "/upload/q_auto,f_auto,w_1920,h_800,c_fill/"
-    );
-  }, []);
-
   // Animation variants for better performance
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -160,15 +152,22 @@ const HeaderClient: React.FC<HeaderClientProps> = memo(({ data }) => {
               <div className="relative aspect-[2.4/1] w-full h-[360px] lg:h-[768px] overflow-hidden">
                 <div className="absolute inset-0 z-10">
                   <Image
-                    src={getOptimizedImageUrl(item.image?.url || "")}
+                    src={
+                      item.image?.url
+                        ? item.image.url.replace(
+                            "/upload/",
+                            "/upload/f_webp,q_auto:eco,w_1920,h_768,c_fill,g_center,fl_progressive/"
+                          )
+                        : ""
+                    }
                     alt={item.label || "Billboard görüntüsü"}
                     className="object-cover h-[360px] lg:h-[768px] brightness-[0.92] contrast-[1.05] saturate-[1.05] transition-transform duration-700 ease-out transform group-hover:scale-105"
                     width={1920}
-                    height={720}
+                    height={768}
                     priority={index === 0}
-                    quality={100}
+                    fetchPriority={index === 0 ? "high" : "low"}
                     placeholder="blur"
-                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                   />
 
                   {/* Simplified overlay for better performance */}
@@ -225,6 +224,8 @@ const HeaderClient: React.FC<HeaderClientProps> = memo(({ data }) => {
               }`}
               onClick={() => handleDotClick(index)}
               disabled={isAnimating}
+              aria-label={`${index + 1}. slayta git`}
+              aria-current={index === current ? "true" : "false"}
             />
           ))}
         </div>
@@ -236,6 +237,7 @@ const HeaderClient: React.FC<HeaderClientProps> = memo(({ data }) => {
           className="absolute left-4 top-1/2 -translate-y-1/2 z-30 h-12 w-12 rounded-full bg-white/10 hover:bg-white/20 border-none backdrop-blur-sm transition-all duration-300 hover:scale-110 disabled:opacity-50"
           onClick={handlePrev}
           disabled={isAnimating}
+          aria-label="Önceki slayt"
         >
           <ChevronLeft className="h-8 w-8 text-white" />
         </Button>
@@ -246,6 +248,7 @@ const HeaderClient: React.FC<HeaderClientProps> = memo(({ data }) => {
           className="absolute right-4 top-1/2 -translate-y-1/2 z-30 h-12 w-12 rounded-full bg-white/10 hover:bg-white/20 border-none backdrop-blur-sm transition-all duration-300 hover:scale-110 disabled:opacity-50"
           onClick={handleNext}
           disabled={isAnimating}
+          aria-label="Sonraki slayt"
         >
           <ChevronRight className="h-8 w-8 text-white" />
         </Button>

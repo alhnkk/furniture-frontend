@@ -23,6 +23,32 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr">
+      <head>
+        <link rel="preconnect" href="https://res.cloudinary.com" />
+        <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+              /* Critical CSS for LCP */
+              .group { position: relative; }
+              .aspect-\\[2\\.4\\/1\\] { aspect-ratio: 2.4 / 1; }
+              .object-cover { object-fit: cover; }
+              .bg-gradient-to-t { background-image: linear-gradient(to top, var(--tw-gradient-stops)); }
+              .from-black\\/40 { --tw-gradient-from: rgb(0 0 0 / 0.4); }
+              .via-transparent { --tw-gradient-via: transparent; }
+              .to-black\\/20 { --tw-gradient-to: rgb(0 0 0 / 0.2); }
+              .absolute { position: absolute; }
+              .inset-0 { inset: 0px; }
+              .z-10 { z-index: 10; }
+              .z-20 { z-index: 20; }
+              .h-\\[360px\\] { height: 360px; }
+              @media (min-width: 1024px) {
+                .lg\\:h-\\[768px\\] { height: 768px; }
+              }
+            `,
+          }}
+        />
+      </head>
       <body
         suppressHydrationWarning={true}
         className={`${poppins.variable} antialiased`}

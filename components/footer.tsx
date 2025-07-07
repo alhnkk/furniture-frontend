@@ -12,8 +12,6 @@ const Footer = async () => {
     { name: "İletişim", href: "/contact" },
   ];
 
-
-
   return (
     <footer className="bg-stone-50 border-t border-stone-100">
       <div className="container mx-auto px-4 py-12">
@@ -91,6 +89,7 @@ const Footer = async () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group"
+                      aria-label="Facebook hesabımızı takip edin"
                     >
                       <div className="w-10 h-10 rounded-2xl bg-stone-50 border border-stone-100 flex items-center justify-center transform group-hover:shadow-lg group-hover:border-amber-100">
                         <Facebook className="w-4 h-4 text-amber-800 group-hover:text-amber-700 transition-colors duration-300" />
@@ -103,6 +102,7 @@ const Footer = async () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group"
+                      aria-label="Instagram hesabımızı takip edin"
                     >
                       <div className="w-10 h-10 rounded-2xl bg-stone-50 border border-stone-100 flex items-center justify-center transform group-hover:shadow-lg group-hover:border-amber-100">
                         <Instagram className="w-4 h-4 text-amber-800 group-hover:text-amber-700 transition-colors duration-300" />
