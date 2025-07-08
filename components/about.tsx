@@ -2,7 +2,13 @@ import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { MotionDiv, MotionH2, MotionP } from "@/lib/motion";
 
-export default function About({ data }: { data: any }) {
+interface AboutData {
+  metaData?: {
+    description?: string;
+  };
+}
+
+export default function About({ data }: { data: AboutData }) {
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
