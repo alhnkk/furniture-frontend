@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 
 import "./globals.css";
 import Footer from "@/components/footer";
+import WhatsAppFloat from "@/components/whatsapp-float";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -55,6 +56,7 @@ export default function RootLayout({
       >
         {children}
         <Footer />
+        <WhatsAppFloat />
       </body>
     </html>
   );
