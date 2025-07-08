@@ -26,7 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
         "Derya Mimarlık Tasarım - Profesyonel mimarlık ve tasarım hizmetleri",
       keywords: settings.metaData?.keywords?.join(", "),
     };
-  } catch (error) {
+  } catch {
     return {
       title: "Derya Mimarlık Tasarım",
       description: "Derya Mimarlık Tasarım",
