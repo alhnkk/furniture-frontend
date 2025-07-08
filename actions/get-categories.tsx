@@ -4,12 +4,18 @@ const URL = `${process.env.NEXT_PUBLIC_API_URL}/categories`;
 
 const getCategories = async (): Promise<Category[]> => {
   try {
+    if (!process.env.NEXT_PUBLIC_API_URL) {
+      console.warn("NEXT_PUBLIC_API_URL tanımlanmamış, boş array döndürülüyor");
+      return [];
+    }
+
     const res = await fetch(URL, {
       next: { revalidate: 0 },
     });
 
     if (!res.ok) {
-      throw new Error("Kategori verisi alınamadı");
+      console.warn("Categories API yanıt vermedi, boş array döndürülüyor");
+      return [];
     }
 
     const data = await res.json();
@@ -38,6 +44,7 @@ const getCategories = async (): Promise<Category[]> => {
       updatedAt: category.updatedAt || "",
     }));
   } catch (error) {
+    console.warn("Categories API hatası, boş array döndürülüyor:", error);
     return [];
   }
 };
