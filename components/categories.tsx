@@ -1,30 +1,32 @@
-import Image from "next/image";
-import { MotionDiv, MotionH2, MotionH3 } from "@/lib/motion";
+"use client";
 
-const categories = [
-  {
-    id: "1",
-    name: "Mutfak",
-    image: "/categories/kitchen.jpg",
-  },
-  {
-    id: "2",
-    name: "Banyo",
-    image: "/categories/bathroom.jpg",
-  },
-  {
-    id: "3",
-    name: "Yatak Odası",
-    image: "/categories/bedroom.jpg",
-  },
-  {
-    id: "4",
-    name: "Oturma Odası",
-    image: "/categories/living-room.jpg",
-  },
-];
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { MotionDiv, MotionH2, MotionH3 } from "@/lib/motion";
+import getCategories from "@/actions/get-categories";
+import { Category } from "@/types";
 
 export default function Categories() {
+  const router = useRouter();
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const categoriesData = await getCategories();
+        setCategories(categoriesData);
+      } catch (error) {
+        console.error("Kategoriler yüklenirken hata:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -88,6 +90,33 @@ export default function Categories() {
     },
   };
 
+  const handleCategoryClick = (categoryId: string) => {
+    router.push(`/products?category=${categoryId}`);
+  };
+
+  if (loading) {
+    return (
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-center py-12">
+          <div className="text-center">
+            <div className="w-8 h-8 border-4 border-amber-800 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-neutral-600">Kategoriler yükleniyor...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (categories.length === 0) {
+    return (
+      <div className="container mx-auto px-4">
+        <div className="text-center py-12">
+          <p className="text-neutral-600">Henüz kategori bulunmuyor.</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <MotionDiv
       className="container mx-auto px-4"
@@ -125,9 +154,10 @@ export default function Categories() {
               transition: { duration: 0.3 },
             }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => handleCategoryClick(category.id)}
           >
             <Image
-              src={category.image}
+              src={category.image?.url || "/mockup.jpeg"}
               alt={category.name}
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               fill
