@@ -41,6 +41,14 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
     }
   }, [searchParams, products, selectedProduct]);
 
+  // Handle category filter from URL
+  useEffect(() => {
+    const categoryId = searchParams.get("category");
+    if (categoryId && categoryId !== selectedCategory) {
+      setSelectedCategory(categoryId);
+    }
+  }, [searchParams, selectedCategory]);
+
   const filteredProducts = selectedCategory
     ? products.filter((product) => product.categoryId === selectedCategory)
     : products;
@@ -51,6 +59,27 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
     const newParams = new URLSearchParams(searchParams.toString());
     newParams.set("product", product.id);
     router.push(`?${newParams.toString()}`);
+  };
+
+  const handleCategorySelect = (categoryId: string | null) => {
+    setSelectedCategory(categoryId);
+
+    // Update URL with category parameter
+    const newParams = new URLSearchParams(searchParams.toString());
+    if (categoryId) {
+      newParams.set("category", categoryId);
+    } else {
+      newParams.delete("category");
+    }
+
+    // Keep any existing product parameter
+    const productId = searchParams.get("product");
+    if (productId) {
+      newParams.set("product", productId);
+    }
+
+    const newQuery = newParams.toString();
+    router.push(`/products${newQuery ? `?${newQuery}` : ""}`);
   };
 
   const handleCloseModal = () => {
@@ -68,7 +97,7 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
     <div>
       <div className="flex flex-wrap gap-4 mb-8 justify-center">
         <button
-          onClick={() => setSelectedCategory(null)}
+          onClick={() => handleCategorySelect(null)}
           className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-300 ${
             selectedCategory === null
               ? "bg-amber-800 text-white"
@@ -80,7 +109,7 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
         {categories.map((category) => (
           <button
             key={category.id}
-            onClick={() => setSelectedCategory(category.id)}
+            onClick={() => handleCategorySelect(category.id)}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-300 ${
               selectedCategory === category.id
                 ? "bg-amber-800 text-white"
