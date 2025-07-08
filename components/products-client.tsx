@@ -59,7 +59,9 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
     // Remove product ID from URL
     const newParams = new URLSearchParams(searchParams.toString());
     newParams.delete("product");
-    router.push(newParams.toString() ? `?${newParams.toString()}` : ".");
+    const newQuery = newParams.toString();
+    // Stay on the same page, just update query parameters
+    router.push(`/products${newQuery ? `?${newQuery}` : ""}`);
   };
 
   return (
