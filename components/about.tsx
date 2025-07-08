@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { MotionDiv, MotionH2, MotionP } from "@/lib/motion";
 
-export default function About() {
+export default function About({ data }: { data: any }) {
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -109,20 +109,7 @@ export default function About() {
 
             <div className="space-y-4 text-gray-600 leading-relaxed">
               <MotionP className="text-lg font-medium" variants={fadeInUp}>
-                Derya Mimarlık Tasarım, estetik ile fonksiyonelliği buluşturan
-                özgün projeleriyle yaşam alanlarına değer katmayı amaçlayan bir
-                iç mimarlık ve tasarım ofisidir. Modern çizgilerle klasik
-                detayları ustalıkla harmanlayan ekibimiz; konut, ofis, mağaza,
-                otel ve ticari alanlar gibi birçok farklı mekânda yenilikçi
-                çözümler sunar. Her projeye özgü kişiselleştirilmiş tasarımlar
-                geliştirerek, müşterilerimizin ihtiyaçlarını ve hayallerini
-                gerçeğe dönüştürmeyi ilke ediniriz. Derya Mimarlık Tasarım
-                olarak, sürdürülebilirlikten ödün vermeden, zarif, işlevsel ve
-                çağdaş mekânlar yaratıyoruz.
-              </MotionP>
-              <MotionP className="text-lg font-medium" variants={fadeInUp}>
-                Modern tasarım anlayışımızı geleneksel değerlerle harmanlayarak,
-                zamansız ve şık çözümler sunuyoruz.
+                {data.metaData?.description}
               </MotionP>
             </div>
           </div>
