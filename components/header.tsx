@@ -1,5 +1,6 @@
 import { Billboard as BillboardType } from "@/types";
 import HeaderClient from "./header-client";
+import Link from "next/link";
 
 interface HeaderProps {
   data: BillboardType[];
@@ -18,12 +19,7 @@ const Header = ({ data }: HeaderProps) => {
   return (
     <>
       {optimizedImageUrl && (
-        <link
-          rel="preload"
-          as="image"
-          href={optimizedImageUrl}
-          fetchPriority="high"
-        />
+        <Link rel="preload" as="image" href={optimizedImageUrl} />
       )}
       <HeaderClient data={data} />
     </>

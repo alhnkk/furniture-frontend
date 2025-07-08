@@ -186,7 +186,7 @@ const HeaderClient: React.FC<HeaderClientProps> = memo(({ data }) => {
                   >
                     {item.description && (
                       <MotionDiv
-                        className="font-black text-4xl sm:text-6xl lg:text-7xl tracking-tight leading-[1.1]"
+                        className="font-black text-3xl sm:text-6xl lg:text-7xl tracking-tight leading-[1.1]"
                         variants={containerVariants}
                       >
                         {item.description.split(" ").map((word, i) => (
@@ -202,7 +202,7 @@ const HeaderClient: React.FC<HeaderClientProps> = memo(({ data }) => {
                     )}
 
                     <MotionDiv
-                      className="text-white/90 text-xl sm:text-2xl font-medium tracking-wide drop-shadow-[0_2px_10px_rgba(0,0,0,0.2)] max-w-3xl"
+                      className="text-white/90 text-lg sm:text-2xl font-medium tracking-wide drop-shadow-[0_2px_10px_rgba(0,0,0,0.2)] max-w-3xl"
                       variants={labelVariants}
                     >
                       {item.label}

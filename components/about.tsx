@@ -147,9 +147,9 @@ export default function About() {
 
             <MotionDiv variants={cardVariants}>
               <Card className="border border-amber-200/50 shadow bg-gradient-to-br from-amber-50 to-white hover:shadow-lg transition-shadow duration-300">
-                <CardContent className="p-6 text-center">
+                <CardContent className="p-6 text-center mr-2">
                   <div className="text-4xl font-bold text-amber-800 mb-2">
-                    1000+
+                    500+
                   </div>
                   <div className="text-gray-600 font-medium">
                     Tamamlanan Proje
@@ -162,7 +162,7 @@ export default function About() {
               <Card className="border border-amber-200/50 shadow bg-gradient-to-br from-amber-50 to-white hover:shadow-lg transition-shadow duration-300">
                 <CardContent className="p-6 text-center">
                   <div className="text-4xl font-bold text-amber-800 mb-2">
-                    1000+
+                    500+
                   </div>
                   <div className="text-gray-600 font-medium">Mutlu Müşteri</div>
                 </CardContent>
