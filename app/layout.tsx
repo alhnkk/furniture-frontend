@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Footer from "@/components/footer";
 import WhatsAppFloat from "@/components/whatsapp-float";
+import getSettings from "@/actions/get-settings";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -12,10 +13,26 @@ const poppins = Poppins({
   variable: "--font-family-poppins",
 });
 
-export const metadata: Metadata = {
-  title: "Derya Mimarlık Tasarım",
-  description: "Derya Mimarlık Tasarım",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  try {
+    const settings = await getSettings();
+    return {
+      title:
+        settings.metaData?.title ||
+        settings.siteName ||
+        "Derya Mimarlık Tasarım",
+      description:
+        settings.metaData?.description ||
+        "Derya Mimarlık Tasarım - Profesyonel mimarlık ve tasarım hizmetleri",
+      keywords: settings.metaData?.keywords?.join(", "),
+    };
+  } catch (error) {
+    return {
+      title: "Derya Mimarlık Tasarım",
+      description: "Derya Mimarlık Tasarım",
+    };
+  }
+}
 
 export default function RootLayout({
   children,
