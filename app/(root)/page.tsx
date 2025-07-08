@@ -21,7 +21,7 @@ const HomePage = async () => {
       <Navbar />
       <Header data={billboard} />
       <div className="flex flex-col gap-4">
-        <About />
+        <About data={settings} />
         <CategoryList data={categories} />
         <ProductSlider data={products} />
         <WhatWeDo />
