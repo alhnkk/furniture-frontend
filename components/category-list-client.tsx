@@ -4,6 +4,7 @@ import { Category } from "@/types";
 import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, ChevronUp, ExternalLink } from "lucide-react";
 
@@ -14,6 +15,7 @@ interface CategoryListClientProps {
 const CategoryListClient: React.FC<CategoryListClientProps> = ({
   data = [],
 }) => {
+  const router = useRouter();
   const [showAll, setShowAll] = useState(false);
   const initialCount = 9;
   const displayedCategories = showAll ? data : data.slice(0, initialCount);
@@ -30,6 +32,10 @@ const CategoryListClient: React.FC<CategoryListClientProps> = ({
     }
   };
 
+  const handleCategoryClick = (categoryId: string) => {
+    router.push(`/products?category=${categoryId}`);
+  };
+
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -39,7 +45,8 @@ const CategoryListClient: React.FC<CategoryListClientProps> = ({
           return (
             <div
               key={category.id || index}
-              className="group relative bg-white shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300"
+              className="group relative bg-white shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer"
+              onClick={() => handleCategoryClick(category.id)}
             >
               <div className="relative h-76 w-full overflow-hidden">
                 {imageUrl ? (
