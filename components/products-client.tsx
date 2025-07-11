@@ -168,11 +168,11 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
       </div>
 
       <Dialog open={!!selectedProduct} onOpenChange={handleCloseModal}>
-        <DialogContent className="w-full h-[90vh] p-0 bg-white overflow-hidden border-0 shadow-2xl">
+        <DialogContent className="max-w-5xl w-[85vw] h-[80vh] p-8 bg-white">
           {selectedProduct && (
-            <div className="flex h-full">
-              <div className="flex-1 bg-gradient-to-br from-stone-50 to-stone-100 p-8 flex flex-col">
-                <div className="relative flex-1 rounded-2xl overflow-hidden bg-white shadow-lg border border-stone-200/50">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 h-full">
+              <div className="md:col-span-2 space-y-4">
+                <div className="relative h-[65vh] overflow-hidden rounded-lg bg-stone-50">
                   <Image
                     src={
                       selectedGalleryImage ||
@@ -187,71 +187,66 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
 
                 {selectedProduct.gallery &&
                   selectedProduct.gallery.length > 0 && (
-                    <div className="mt-6 bg-white rounded-xl p-4 shadow-sm border border-stone-200/50">
-                      <div className="grid grid-cols-10 gap-3">
+                    <div className="grid grid-cols-6 gap-2">
+                      <div
+                        className={`relative aspect-square rounded-lg overflow-hidden cursor-pointer border-2 ${
+                          !selectedGalleryImage
+                            ? "border-amber-600"
+                            : "border-gray-200 hover:border-amber-400"
+                        }`}
+                        onClick={() => setSelectedGalleryImage(null)}
+                      >
+                        <Image
+                          src={
+                            selectedProduct.images?.[0]?.url || "/mockup.jpeg"
+                          }
+                          alt={selectedProduct.name}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      {selectedProduct.gallery.map((item: GalleryItem) => (
                         <div
-                          className={`relative aspect-square rounded-lg overflow-hidden cursor-pointer border ${
-                            !selectedGalleryImage
-                              ? "border-amber-800 ring-2 ring-amber-800"
-                              : "border-stone-200 hover:border-amber-800"
+                          key={item.id}
+                          className={`relative aspect-square rounded-lg overflow-hidden cursor-pointer border-2 ${
+                            selectedGalleryImage === item.image.url
+                              ? "border-amber-600"
+                              : "border-gray-200 hover:border-amber-400"
                           }`}
-                          onClick={() => setSelectedGalleryImage(null)}
+                          onClick={() =>
+                            setSelectedGalleryImage(item.image.url)
+                          }
                         >
                           <Image
-                            src={
-                              selectedProduct.images?.[0]?.url || "/mockup.jpeg"
-                            }
+                            src={item.image.url}
                             alt={selectedProduct.name}
                             fill
                             className="object-cover"
                           />
                         </div>
-                        {selectedProduct.gallery.map((item: GalleryItem) => (
-                          <div
-                            key={item.id}
-                            className={`relative aspect-square rounded-lg overflow-hidden cursor-pointer border ${
-                              selectedGalleryImage === item.image.url
-                                ? "border-amber-800 ring-2 ring-amber-800"
-                                : "border-stone-200 hover:border-amber-800"
-                            }`}
-                            onClick={() =>
-                              setSelectedGalleryImage(item.image.url)
-                            }
-                          >
-                            <Image
-                              src={item.image.url}
-                              alt={selectedProduct.name}
-                              fill
-                              className="object-cover"
-                            />
-                          </div>
-                        ))}
-                      </div>
+                      ))}
                     </div>
                   )}
               </div>
 
-              <div className="w-[900px] bg-white border-l border-stone-200 flex flex-col">
-                <div className="p-8 border-b border-stone-100">
-                  <DialogHeader className="text-left">
-                    <DialogTitle className="text-3xl font-bold text-amber-950 mb-3">
-                      {selectedProduct.name}
-                    </DialogTitle>
-                    <div className="inline-block px-4 py-2 bg-amber-100 text-amber-800 rounded-full text-sm font-medium">
-                      {selectedProduct.category?.name}
-                    </div>
-                  </DialogHeader>
-                </div>
+              <div className="flex flex-col">
+                <DialogHeader className="mb-6">
+                  <DialogTitle className="text-2xl font-bold text-amber-950">
+                    {selectedProduct.name}
+                  </DialogTitle>
+                  <p className="text-amber-700 mt-2 text-lg">
+                    {selectedProduct.category?.name}
+                  </p>
+                </DialogHeader>
 
-                <div className="flex-1 p-8 overflow-y-auto">
+                <div className="flex-grow">
                   {selectedProduct.description && (
                     <div>
-                      <h4 className="text-xl font-semibold text-amber-900 mb-4 flex items-center">
-                        <span className="w-1 h-6 bg-amber-800 rounded-full mr-3"></span>
-                        Ürün Açıklaması
+                      <h4 className="text-lg font-semibold text-amber-900 mb-3">
+                        Açıklama
                       </h4>
-                      <div className="bg-gradient-to-br from-amber-50 to-stone-50 rounded-2xl p-6 border border-amber-100">
-                        <p className="text-neutral-700 leading-relaxed whitespace-pre-wrap text-base">
+                      <div className="bg-stone-50 rounded-lg p-4">
+                        <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
                           {selectedProduct.description}
                         </p>
                       </div>
