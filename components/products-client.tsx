@@ -168,7 +168,7 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
       </div>
 
       <Dialog open={!!selectedProduct} onOpenChange={handleCloseModal}>
-        <DialogContent className="max-w-5xl w-[85vw] h-[80vh] p-8 bg-white">
+        <DialogContent className="w-[200vh] h-[80vh] p-8 bg-white">
           {selectedProduct && (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 h-full">
               <div className="md:col-span-2 space-y-4">
