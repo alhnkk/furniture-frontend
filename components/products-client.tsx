@@ -169,12 +169,7 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
       </div>
 
       <Dialog open={!!selectedProduct} onOpenChange={handleCloseModal}>
-        <DialogContent className="max-w-none w-[95vw] h-[90vh] p-0 bg-white overflow-hidden border-0 shadow-2xl">
-          <DialogClose className="absolute right-6 top-6 z-50">
-            <div className="bg-white/90 backdrop-blur-sm hover:bg-white p-3 rounded-full transition-all duration-200 shadow-lg">
-              <X className="w-6 h-6 text-amber-900" />
-            </div>
-          </DialogClose>
+        <DialogContent className="w-full h-[90vh] p-0 bg-white overflow-hidden border-0 shadow-2xl">
 
           {selectedProduct && (
             <div className="flex h-full">
