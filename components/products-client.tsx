@@ -8,9 +8,8 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogClose,
 } from "@/components/ui/dialog";
-import { X, ZoomIn } from "lucide-react";
+import { ZoomIn } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 interface ProductsClientProps {
@@ -170,7 +169,6 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
 
       <Dialog open={!!selectedProduct} onOpenChange={handleCloseModal}>
         <DialogContent className="w-full h-[90vh] p-0 bg-white overflow-hidden border-0 shadow-2xl">
-
           {selectedProduct && (
             <div className="flex h-full">
               <div className="flex-1 bg-gradient-to-br from-stone-50 to-stone-100 p-8 flex flex-col">
@@ -233,7 +231,7 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
                   )}
               </div>
 
-              <div className="w-96 bg-white border-l border-stone-200 flex flex-col">
+              <div className="w-[900px] bg-white border-l border-stone-200 flex flex-col">
                 <div className="p-8 border-b border-stone-100">
                   <DialogHeader className="text-left">
                     <DialogTitle className="text-3xl font-bold text-amber-950 mb-3">
