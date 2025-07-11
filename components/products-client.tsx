@@ -142,7 +142,7 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
                     src={imageUrl}
                     alt={product.name || "Ürün Görseli"}
                     fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="object-contain transition-transform duration-700 group-hover:scale-110"
                     priority={productIndex < 4}
                     fetchPriority={productIndex < 4 ? "high" : "low"}
                     placeholder="blur"
@@ -188,7 +188,7 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
                     }
                     alt={selectedProduct.name}
                     fill
-                    className="object-cover"
+                    className="object-contain"
                   />
                 </div>
 
@@ -209,7 +209,7 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
                           }
                           alt={selectedProduct.name}
                           fill
-                          className="object-cover"
+                          className="object-contain"
                         />
                       </div>
                       {selectedProduct.gallery.map((item: GalleryItem) => (
@@ -228,7 +228,7 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
                             src={item.image.url}
                             alt={selectedProduct.name}
                             fill
-                            className="object-cover"
+                            className="object-contain"
                           />
                         </div>
                       ))}
