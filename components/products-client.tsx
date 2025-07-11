@@ -28,6 +28,7 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
   const [selectedGalleryImage, setSelectedGalleryImage] = useState<
     string | null
   >(null);
+  const [visibleGalleryCount, setVisibleGalleryCount] = useState<number>(30);
 
   // Handle direct product access via URL
   useEffect(() => {
@@ -79,12 +80,17 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
   const handleCloseModal = () => {
     setSelectedProduct(null);
     setSelectedGalleryImage(null);
+    setVisibleGalleryCount(30);
     // Remove product ID from URL
     const newParams = new URLSearchParams(searchParams.toString());
     newParams.delete("product");
     const newQuery = newParams.toString();
     // Stay on the same page, just update query parameters
     router.push(`/products${newQuery ? `?${newQuery}` : ""}`);
+  };
+
+  const handleShowMoreGallery = () => {
+    setVisibleGalleryCount((prev) => prev + 15);
   };
 
   return (
@@ -168,11 +174,11 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
       </div>
 
       <Dialog open={!!selectedProduct} onOpenChange={handleCloseModal}>
-        <DialogContent className="w-[200vh] h-[80vh] p-8 bg-white">
+        <DialogContent className="w-[1200px] h-[80vh] p-8 bg-white">
           {selectedProduct && (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 h-full">
               <div className="md:col-span-2 space-y-4">
-                <div className="relative w-full h-[65vh] overflow-hidden rounded-lg bg-stone-50">
+                <div className="relative w-[600px] h-[65vh] overflow-hidden rounded-lg bg-stone-50">
                   <Image
                     src={
                       selectedGalleryImage ||
@@ -187,44 +193,62 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
 
                 {selectedProduct.gallery &&
                   selectedProduct.gallery.length > 0 && (
-                    <div className="grid grid-cols-6 gap-2">
-                      <div
-                        className={`relative aspect-square rounded-lg overflow-hidden cursor-pointer border-2 ${
-                          !selectedGalleryImage
-                            ? "border-amber-600"
-                            : "border-gray-200 hover:border-amber-400"
-                        }`}
-                        onClick={() => setSelectedGalleryImage(null)}
-                      >
-                        <Image
-                          src={
-                            selectedProduct.images?.[0]?.url || "/mockup.jpeg"
-                          }
-                          alt={selectedProduct.name}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                      {selectedProduct.gallery.map((item: GalleryItem) => (
+                    <div className="space-y-4">
+                      <div className="grid grid-cols-6 gap-2">
                         <div
-                          key={item.id}
                           className={`relative aspect-square rounded-lg overflow-hidden cursor-pointer border-2 ${
-                            selectedGalleryImage === item.image.url
+                            !selectedGalleryImage
                               ? "border-amber-600"
                               : "border-gray-200 hover:border-amber-400"
                           }`}
-                          onClick={() =>
-                            setSelectedGalleryImage(item.image.url)
-                          }
+                          onClick={() => setSelectedGalleryImage(null)}
                         >
                           <Image
-                            src={item.image.url}
+                            src={
+                              selectedProduct.images?.[0]?.url || "/mockup.jpeg"
+                            }
                             alt={selectedProduct.name}
                             fill
                             className="object-cover"
                           />
                         </div>
-                      ))}
+                        {selectedProduct.gallery
+                          .slice(0, visibleGalleryCount)
+                          .map((item: GalleryItem) => (
+                            <div
+                              key={item.id}
+                              className={`relative aspect-square rounded-lg overflow-hidden cursor-pointer border-2 ${
+                                selectedGalleryImage === item.image.url
+                                  ? "border-amber-600"
+                                  : "border-gray-200 hover:border-amber-400"
+                              }`}
+                              onClick={() =>
+                                setSelectedGalleryImage(item.image.url)
+                              }
+                            >
+                              <Image
+                                src={item.image.url}
+                                alt={selectedProduct.name}
+                                fill
+                                className="object-cover"
+                              />
+                            </div>
+                          ))}
+                      </div>
+
+                      {selectedProduct.gallery.length > visibleGalleryCount && (
+                        <div className="flex justify-center pt-4">
+                          <button
+                            onClick={handleShowMoreGallery}
+                            className="px-6 py-3 bg-amber-800 text-white rounded-lg hover:bg-amber-900 transition-colors duration-200 font-medium"
+                          >
+                            Daha Fazla Göster (
+                            {selectedProduct.gallery.length -
+                              visibleGalleryCount}{" "}
+                            kalan)
+                          </button>
+                        </div>
+                      )}
                     </div>
                   )}
               </div>
