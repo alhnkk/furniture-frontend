@@ -132,7 +132,7 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
               className="group cursor-pointer"
               onClick={() => handleProductSelect(product)}
             >
-              <div className="relative aspect-square overflow-hidden rounded-2xl">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
                 <div className="absolute inset-0">
                   <div className="absolute inset-0 bg-[conic-gradient(from_0deg,#7c2d12_0deg,transparent_60deg,transparent_300deg,#7c2d12_360deg)] opacity-20 animate-[spin_8s_linear_infinite]" />
                   <div className="absolute inset-0 bg-gradient-to-br from-amber-900/20 via-amber-800/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
@@ -169,7 +169,7 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
       </div>
 
       <Dialog open={!!selectedProduct} onOpenChange={handleCloseModal}>
-        <DialogContent className="max-w-4xl p-6 bg-white">
+        <DialogContent className="max-w-6xl p-6 bg-white">
           <DialogClose className="absolute right-4 top-4 z-50">
             <div className="bg-stone-100 hover:bg-stone-200 p-2 rounded-full transition-colors">
               <X className="w-5 h-5 text-amber-900" />
@@ -179,7 +179,7 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
           {selectedProduct && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-4">
-                <div className="relative aspect-square overflow-hidden rounded-xl border border-stone-200">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-stone-200">
                   <Image
                     src={
                       selectedGalleryImage ||
@@ -196,7 +196,7 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
                   selectedProduct.gallery.length > 0 && (
                     <div className="grid grid-cols-4 gap-2">
                       <div
-                        className={`relative aspect-square rounded-lg overflow-hidden cursor-pointer border ${
+                        className={`relative aspect-[4/3] rounded-lg overflow-hidden cursor-pointer border ${
                           !selectedGalleryImage
                             ? "border-amber-800 ring-1 ring-amber-800"
                             : "border-stone-200 hover:border-amber-800"
@@ -215,7 +215,7 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
                       {selectedProduct.gallery.map((item: GalleryItem) => (
                         <div
                           key={item.id}
-                          className={`relative aspect-square rounded-lg overflow-hidden cursor-pointer border ${
+                          className={`relative aspect-[4/3] rounded-lg overflow-hidden cursor-pointer border ${
                             selectedGalleryImage === item.image.url
                               ? "border-amber-800 ring-1 ring-amber-800"
                               : "border-stone-200 hover:border-amber-800"
