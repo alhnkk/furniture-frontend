@@ -122,7 +122,7 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
             product.images && product.images.length > 0 && product.images[0].url
               ? product.images[0].url.replace(
                   "/upload/",
-                  "/upload/f_webp,q_auto:eco,w_400,h_400,c_fill,g_center,fl_progressive/"
+                  "/upload/f_webp,q_auto:good,w_600,h_800,c_fit,fl_progressive/"
                 )
               : "/mockup.jpeg";
 
@@ -132,12 +132,12 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
               className="group cursor-pointer"
               onClick={() => handleProductSelect(product)}
             >
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-stone-50 p-3">
                 <div className="absolute inset-0">
                   <div className="absolute inset-0 bg-[conic-gradient(from_0deg,#7c2d12_0deg,transparent_60deg,transparent_300deg,#7c2d12_360deg)] opacity-20 animate-[spin_8s_linear_infinite]" />
                   <div className="absolute inset-0 bg-gradient-to-br from-amber-900/20 via-amber-800/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 </div>
-                <div className="relative h-full w-full">
+                <div className="relative h-full w-full rounded-xl overflow-hidden">
                   <Image
                     src={imageUrl}
                     alt={product.name || "Ürün Görseli"}
@@ -177,9 +177,9 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
           </DialogClose>
 
           {selectedProduct && (
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              <div className="space-y-4 lg:col-span-2">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-stone-200">
+            <div className="flex flex-col lg:flex-row gap-8 h-full">
+              <div className="flex-1 lg:w-2/3 space-y-4">
+                <div className="relative w-full h-[60vh] overflow-hidden rounded-xl border border-stone-200">
                   <Image
                     src={
                       selectedGalleryImage ||
@@ -188,17 +188,17 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
                     }
                     alt={selectedProduct.name}
                     fill
-                    className="object-contain"
+                    className="object-contain w-full h-full"
                   />
                 </div>
 
                 {selectedProduct.gallery &&
                   selectedProduct.gallery.length > 0 && (
-                    <div className="grid grid-cols-4 gap-2">
+                    <div className="grid grid-cols-8 gap-2">
                       <div
-                        className={`relative aspect-[4/3] rounded-lg overflow-hidden cursor-pointer border ${
+                        className={`relative aspect-square rounded-lg overflow-hidden cursor-pointer border ${
                           !selectedGalleryImage
-                            ? "border-amber-800 ring-1 ring-amber-800"
+                            ? "border-amber-800 ring-2 ring-amber-800"
                             : "border-stone-200 hover:border-amber-800"
                         }`}
                         onClick={() => setSelectedGalleryImage(null)}
@@ -209,15 +209,15 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
                           }
                           alt={selectedProduct.name}
                           fill
-                          className="object-contain"
+                          className="object-cover"
                         />
                       </div>
                       {selectedProduct.gallery.map((item: GalleryItem) => (
                         <div
                           key={item.id}
-                          className={`relative aspect-[4/3] rounded-lg overflow-hidden cursor-pointer border ${
+                          className={`relative aspect-square rounded-lg overflow-hidden cursor-pointer border ${
                             selectedGalleryImage === item.image.url
-                              ? "border-amber-800 ring-1 ring-amber-800"
+                              ? "border-amber-800 ring-2 ring-amber-800"
                               : "border-stone-200 hover:border-amber-800"
                           }`}
                           onClick={() =>
@@ -228,7 +228,7 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
                             src={item.image.url}
                             alt={selectedProduct.name}
                             fill
-                            className="object-contain"
+                            className="object-cover"
                           />
                         </div>
                       ))}
@@ -236,7 +236,7 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
                   )}
               </div>
 
-              <div className="flex flex-col">
+              <div className="flex flex-col lg:w-1/3 lg:max-w-md">
                 <DialogHeader className="mb-6">
                   <DialogTitle className="text-2xl font-bold text-amber-950">
                     {selectedProduct.name}
