@@ -172,7 +172,7 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
           {selectedProduct && (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 h-full">
               <div className="md:col-span-2 space-y-4">
-                <div className="relative h-[65vh] overflow-hidden rounded-lg bg-stone-50">
+                <div className="relative w-full h-[65vh] overflow-hidden rounded-lg bg-stone-50">
                   <Image
                     src={
                       selectedGalleryImage ||
