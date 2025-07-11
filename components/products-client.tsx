@@ -142,7 +142,7 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
                     src={imageUrl}
                     alt={product.name || "Ürün Görseli"}
                     fill
-                    className="object-contain transition-transform duration-700 group-hover:scale-110"
+                    className="object-contain transition-transform duration-700 group-hover:scale-105"
                     priority={productIndex < 4}
                     fetchPriority={productIndex < 4 ? "high" : "low"}
                     placeholder="blur"
@@ -169,7 +169,7 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
       </div>
 
       <Dialog open={!!selectedProduct} onOpenChange={handleCloseModal}>
-        <DialogContent className="max-w-6xl p-6 bg-white">
+        <DialogContent className="max-w-7xl w-[90vw] h-[85vh] p-6 bg-white overflow-y-auto">
           <DialogClose className="absolute right-4 top-4 z-50">
             <div className="bg-stone-100 hover:bg-stone-200 p-2 rounded-full transition-colors">
               <X className="w-5 h-5 text-amber-900" />
@@ -177,8 +177,8 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
           </DialogClose>
 
           {selectedProduct && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="space-y-4">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div className="space-y-4 lg:col-span-2">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-stone-200">
                   <Image
                     src={
