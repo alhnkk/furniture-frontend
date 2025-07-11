@@ -169,17 +169,17 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
       </div>
 
       <Dialog open={!!selectedProduct} onOpenChange={handleCloseModal}>
-        <DialogContent className="max-w-7xl w-[90vw] h-[85vh] p-6 bg-white overflow-y-auto">
-          <DialogClose className="absolute right-4 top-4 z-50">
-            <div className="bg-stone-100 hover:bg-stone-200 p-2 rounded-full transition-colors">
-              <X className="w-5 h-5 text-amber-900" />
+        <DialogContent className="max-w-none w-[95vw] h-[90vh] p-0 bg-white overflow-hidden border-0 shadow-2xl">
+          <DialogClose className="absolute right-6 top-6 z-50">
+            <div className="bg-white/90 backdrop-blur-sm hover:bg-white p-3 rounded-full transition-all duration-200 shadow-lg">
+              <X className="w-6 h-6 text-amber-900" />
             </div>
           </DialogClose>
 
           {selectedProduct && (
-            <div className="flex flex-col lg:flex-row gap-8 h-full">
-              <div className="flex-1 lg:w-2/3 space-y-4">
-                <div className="relative w-full h-[60vh] overflow-hidden rounded-xl border border-stone-200">
+            <div className="flex h-full">
+              <div className="flex-1 bg-gradient-to-br from-stone-50 to-stone-100 p-8 flex flex-col">
+                <div className="relative flex-1 rounded-2xl overflow-hidden bg-white shadow-lg border border-stone-200/50">
                   <Image
                     src={
                       selectedGalleryImage ||
@@ -188,72 +188,77 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
                     }
                     alt={selectedProduct.name}
                     fill
-                    className="object-contain w-full h-full"
+                    className="object-contain p-4"
                   />
                 </div>
 
                 {selectedProduct.gallery &&
                   selectedProduct.gallery.length > 0 && (
-                    <div className="grid grid-cols-8 gap-2">
-                      <div
-                        className={`relative aspect-square rounded-lg overflow-hidden cursor-pointer border ${
-                          !selectedGalleryImage
-                            ? "border-amber-800 ring-2 ring-amber-800"
-                            : "border-stone-200 hover:border-amber-800"
-                        }`}
-                        onClick={() => setSelectedGalleryImage(null)}
-                      >
-                        <Image
-                          src={
-                            selectedProduct.images?.[0]?.url || "/mockup.jpeg"
-                          }
-                          alt={selectedProduct.name}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                      {selectedProduct.gallery.map((item: GalleryItem) => (
+                    <div className="mt-6 bg-white rounded-xl p-4 shadow-sm border border-stone-200/50">
+                      <div className="grid grid-cols-10 gap-3">
                         <div
-                          key={item.id}
                           className={`relative aspect-square rounded-lg overflow-hidden cursor-pointer border ${
-                            selectedGalleryImage === item.image.url
+                            !selectedGalleryImage
                               ? "border-amber-800 ring-2 ring-amber-800"
                               : "border-stone-200 hover:border-amber-800"
                           }`}
-                          onClick={() =>
-                            setSelectedGalleryImage(item.image.url)
-                          }
+                          onClick={() => setSelectedGalleryImage(null)}
                         >
                           <Image
-                            src={item.image.url}
+                            src={
+                              selectedProduct.images?.[0]?.url || "/mockup.jpeg"
+                            }
                             alt={selectedProduct.name}
                             fill
                             className="object-cover"
                           />
                         </div>
-                      ))}
+                        {selectedProduct.gallery.map((item: GalleryItem) => (
+                          <div
+                            key={item.id}
+                            className={`relative aspect-square rounded-lg overflow-hidden cursor-pointer border ${
+                              selectedGalleryImage === item.image.url
+                                ? "border-amber-800 ring-2 ring-amber-800"
+                                : "border-stone-200 hover:border-amber-800"
+                            }`}
+                            onClick={() =>
+                              setSelectedGalleryImage(item.image.url)
+                            }
+                          >
+                            <Image
+                              src={item.image.url}
+                              alt={selectedProduct.name}
+                              fill
+                              className="object-cover"
+                            />
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   )}
               </div>
 
-              <div className="flex flex-col lg:w-1/3 lg:max-w-md">
-                <DialogHeader className="mb-6">
-                  <DialogTitle className="text-2xl font-bold text-amber-950">
-                    {selectedProduct.name}
-                  </DialogTitle>
-                  <p className="text-amber-800 mt-2 text-lg">
-                    {selectedProduct.category?.name}
-                  </p>
-                </DialogHeader>
+              <div className="w-96 bg-white border-l border-stone-200 flex flex-col">
+                <div className="p-8 border-b border-stone-100">
+                  <DialogHeader className="text-left">
+                    <DialogTitle className="text-3xl font-bold text-amber-950 mb-3">
+                      {selectedProduct.name}
+                    </DialogTitle>
+                    <div className="inline-block px-4 py-2 bg-amber-100 text-amber-800 rounded-full text-sm font-medium">
+                      {selectedProduct.category?.name}
+                    </div>
+                  </DialogHeader>
+                </div>
 
-                <div className="flex-grow">
+                <div className="flex-1 p-8 overflow-y-auto">
                   {selectedProduct.description && (
                     <div>
-                      <h4 className="text-lg font-semibold text-amber-900 mb-3">
-                        Açıklama
+                      <h4 className="text-xl font-semibold text-amber-900 mb-4 flex items-center">
+                        <span className="w-1 h-6 bg-amber-800 rounded-full mr-3"></span>
+                        Ürün Açıklaması
                       </h4>
-                      <div className="bg-stone-50 rounded-xl p-6">
-                        <p className="text-neutral-700 leading-relaxed whitespace-pre-wrap">
+                      <div className="bg-gradient-to-br from-amber-50 to-stone-50 rounded-2xl p-6 border border-amber-100">
+                        <p className="text-neutral-700 leading-relaxed whitespace-pre-wrap text-base">
                           {selectedProduct.description}
                         </p>
                       </div>
