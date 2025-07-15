@@ -2,6 +2,32 @@ import { Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
 import getSettings from "@/actions/get-settings";
 
+// Sosyal medya linklerini düzgün formatlama fonksiyonu
+const formatSocialMediaUrl = (
+  url: string | undefined,
+  platform: "facebook" | "instagram"
+): string => {
+  if (!url) return "#";
+
+  // Eğer URL zaten https:// ile başlıyorsa olduğu gibi döndür
+  if (url.startsWith("https://") || url.startsWith("http://")) {
+    return url;
+  }
+
+  // @ işareti ile başlıyorsa kaldır
+  const cleanUrl = url.replace(/^@/, "");
+
+  // Platform bazında doğru URL'yi oluştur
+  switch (platform) {
+    case "facebook":
+      return `https://facebook.com/${cleanUrl}`;
+    case "instagram":
+      return `https://instagram.com/${cleanUrl}`;
+    default:
+      return "#";
+  }
+};
+
 const Footer = async () => {
   const settings = await getSettings();
   const { contactInfo, socialMedia } = settings;
@@ -83,32 +109,42 @@ const Footer = async () => {
             <div className="flex space-x-3">
               {socialMedia && (
                 <>
-                  <div>
-                    <a
-                      href={socialMedia.facebook}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group"
-                      aria-label="Facebook hesabımızı takip edin"
-                    >
-                      <div className="w-10 h-10 rounded-2xl bg-stone-50 border border-stone-100 flex items-center justify-center transform group-hover:shadow-lg group-hover:border-amber-100">
-                        <Facebook className="w-4 h-4 text-amber-800 group-hover:text-amber-700 transition-colors duration-300" />
-                      </div>
-                    </a>
-                  </div>
-                  <div>
-                    <a
-                      href={socialMedia.instagram}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group"
-                      aria-label="Instagram hesabımızı takip edin"
-                    >
-                      <div className="w-10 h-10 rounded-2xl bg-stone-50 border border-stone-100 flex items-center justify-center transform group-hover:shadow-lg group-hover:border-amber-100">
-                        <Instagram className="w-4 h-4 text-amber-800 group-hover:text-amber-700 transition-colors duration-300" />
-                      </div>
-                    </a>
-                  </div>
+                  {socialMedia.facebook && (
+                    <div>
+                      <a
+                        href={formatSocialMediaUrl(
+                          socialMedia.facebook,
+                          "facebook"
+                        )}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group"
+                        aria-label="Facebook hesabımızı takip edin"
+                      >
+                        <div className="w-10 h-10 rounded-2xl bg-stone-50 border border-stone-100 flex items-center justify-center transform group-hover:shadow-lg group-hover:border-amber-100">
+                          <Facebook className="w-4 h-4 text-amber-800 group-hover:text-amber-700 transition-colors duration-300" />
+                        </div>
+                      </a>
+                    </div>
+                  )}
+                  {socialMedia.instagram && (
+                    <div>
+                      <a
+                        href={formatSocialMediaUrl(
+                          socialMedia.instagram,
+                          "instagram"
+                        )}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group"
+                        aria-label="Instagram hesabımızı takip edin"
+                      >
+                        <div className="w-10 h-10 rounded-2xl bg-stone-50 border border-stone-100 flex items-center justify-center transform group-hover:shadow-lg group-hover:border-amber-100">
+                          <Instagram className="w-4 h-4 text-amber-800 group-hover:text-amber-700 transition-colors duration-300" />
+                        </div>
+                      </a>
+                    </div>
+                  )}
                 </>
               )}
             </div>
