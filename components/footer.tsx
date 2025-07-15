@@ -15,13 +15,17 @@ const formatSocialMediaUrl = (
   }
 
   // @ işareti ile başlıyorsa kaldır
-  const cleanUrl = url.replace(/^@/, "");
+  let cleanUrl = url.replace(/^@/, "");
 
-  // Platform bazında doğru URL'yi oluştur
+  // Platform adını URL'den temizle
   switch (platform) {
     case "facebook":
+      // facebook.com/ kısmını kaldır
+      cleanUrl = cleanUrl.replace(/^(www\.)?facebook\.com\//, "");
       return `https://facebook.com/${cleanUrl}`;
     case "instagram":
+      // instagram.com/ kısmını kaldır
+      cleanUrl = cleanUrl.replace(/^(www\.)?instagram\.com\//, "");
       return `https://instagram.com/${cleanUrl}`;
     default:
       return "#";
