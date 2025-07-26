@@ -12,7 +12,7 @@ const Header = ({ data }: HeaderProps) => {
   const optimizedImageUrl = firstImageUrl
     ? firstImageUrl.replace(
         "/upload/",
-        "/upload/f_webp,q_auto:eco,w_1920,h_768,c_fill,g_center,fl_progressive/"
+        "/upload/f_webp,q_auto:eco,w_1920,h_800,c_fit,fl_progressive/"
       )
     : null;
 
