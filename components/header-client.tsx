@@ -299,7 +299,7 @@ const HeaderClient: React.FC<HeaderClientProps> = memo(({ data }) => {
         </CarouselContent>
 
         {/* Optimized dots indicator - positioned on the right side */}
-        <div className="absolute right-8 top-1/2 transform -translate-y-1/2 flex flex-col gap-3 z-30">
+        <div className="absolute right-8 top-1/2 transform -translate-y-1/2 flex flex-col gap-3 z-40">
           {data.map((_, index) => (
             <button
               key={index}
@@ -320,7 +320,7 @@ const HeaderClient: React.FC<HeaderClientProps> = memo(({ data }) => {
         <Button
           variant="ghost"
           size="icon"
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-30 h-12 w-12 rounded-full bg-gray-800/10 hover:bg-gray-800/20 border-none backdrop-blur-sm transition-all duration-300 hover:scale-110 disabled:opacity-50"
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-50 h-12 w-12 rounded-full bg-gray-800/10 hover:bg-gray-800/20 border-none backdrop-blur-sm transition-all duration-300 hover:scale-110 disabled:opacity-50"
           onClick={handlePrev}
           disabled={isAnimating}
           aria-label="Önceki slayt"
@@ -331,7 +331,7 @@ const HeaderClient: React.FC<HeaderClientProps> = memo(({ data }) => {
         <Button
           variant="ghost"
           size="icon"
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-30 h-12 w-12 rounded-full bg-gray-800/10 hover:bg-gray-800/20 border-none backdrop-blur-sm transition-all duration-300 hover:scale-110 disabled:opacity-50"
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-50 h-12 w-12 rounded-full bg-gray-800/10 hover:bg-gray-800/20 border-none backdrop-blur-sm transition-all duration-300 hover:scale-110 disabled:opacity-50"
           onClick={handleNext}
           disabled={isAnimating}
           aria-label="Sonraki slayt"
