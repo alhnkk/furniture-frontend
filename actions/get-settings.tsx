@@ -15,7 +15,7 @@ const getSettings = async (): Promise<Settings> => {
     const timeoutId = setTimeout(() => controller.abort(), 10000);
 
     const res = await fetch(URL, {
-      cache: 'no-store',
+      next: { revalidate: 86400 }, // 24 saat cache (settings çok nadiren değişir)
       signal: controller.signal,
     });
 

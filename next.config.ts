@@ -9,6 +9,13 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Build optimization
+  experimental: {
+    // Optimize package imports
+    optimizePackageImports: ['framer-motion', 'lucide-react'],
+  },
+  // Reduce build output
+  compress: true,
 };
 
 export default nextConfig;

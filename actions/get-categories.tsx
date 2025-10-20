@@ -13,7 +13,7 @@ const getCategories = async (): Promise<Category[]> => {
     const timeoutId = setTimeout(() => controller.abort(), 10000);
 
     const res = await fetch(URL, {
-      cache: 'no-store',
+      next: { revalidate: 3600 }, // 1 saat cache
       signal: controller.signal,
     });
 
@@ -28,7 +28,7 @@ const getCategories = async (): Promise<Category[]> => {
 
     // Validate that we received an array
     if (!Array.isArray(data)) {
-      return [];
+      return []; 
     }
 
     // Validate and transform each category

@@ -13,7 +13,7 @@ const getProduct = async (): Promise<Product[]> => {
     const timeoutId = setTimeout(() => controller.abort(), 10000);
 
     const res = await fetch(URL, {
-      cache: 'no-store',
+      next: { revalidate: 1800 }, // 30 dakika cache
       signal: controller.signal,
     });
 

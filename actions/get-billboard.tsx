@@ -13,7 +13,7 @@ const getBillboard = async (): Promise<Billboard[]> => {
     const timeoutId = setTimeout(() => controller.abort(), 10000);
 
     const res = await fetch(URL, {
-      cache: 'no-store',
+      next: { revalidate: 7200 }, // 2 saat cache (billboard nadiren değişir)
       signal: controller.signal,
     });
 

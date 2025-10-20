@@ -10,7 +10,8 @@ import Contact from "@/components/contact";
 import getSettings from "@/actions/get-settings";
 import Navbar from "@/components/navbar";
 
-export const dynamic = 'force-dynamic';
+// ISR - Her 1 saatte bir (3600 saniye) revalidate et
+export const revalidate = 3600;
 
 const HomePage = async () => {
   const billboard = await getBillboard();

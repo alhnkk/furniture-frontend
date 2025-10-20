@@ -3,7 +3,8 @@ import getCategories from "@/actions/get-categories";
 import getProduct from "@/actions/get-product";
 import ProductsClient from "@/components/products-client";
 
-export const dynamic = 'force-dynamic';
+// ISR - Her 30 dakikada bir (1800 saniye) revalidate et
+export const revalidate = 1800;
 
 const ProductsPage = async () => {
   const products = await getProduct();
