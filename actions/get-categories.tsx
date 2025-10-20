@@ -10,7 +10,7 @@ const getCategories = async (): Promise<Category[]> => {
     }
 
     const res = await fetch(URL, {
-      next: { revalidate: 0 },
+      next: { revalidate: 3600 },
     });
 
     if (!res.ok) {
